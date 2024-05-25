@@ -3,20 +3,27 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "files": ["/src/**/*"],
+  "files": [
+    "/src/**/*"
+  ],
   "scripts": {
     "dev": "tsx watch --env-file=.env src/http/server.ts"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@rocketseat/eslint-config": "^2.2.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.12.12",
     "eslint": "^9.3.0",
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "prettier": "^3.2.5",
+    "prisma": "^5.14.0",
     "tsx": "^4.11.0",
     "typescript": "^5.4.5"
   },
@@ -25,6 +32,7 @@
     "@fastify/jwt": "^8.0.1",
     "@fastify/swagger": "^8.14.0",
     "@fastify/swagger-ui": "^3.0.0",
+    "@prisma/client": "^5.14.0",
     "bcryptjs": "^2.4.3",
     "fastify": "^4.27.0",
     "fastify-plugin": "^4.5.1",
