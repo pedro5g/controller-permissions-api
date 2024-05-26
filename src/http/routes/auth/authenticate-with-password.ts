@@ -1,4 +1,5 @@
 import { env } from '@/env'
+import { BadRequestError } from '@/http/_errors/bad-request-error'
 import { prisma } from '@/http/lib/prisma'
 import { compare } from 'bcryptjs'
 import { FastifyInstance } from 'fastify'
@@ -27,17 +28,17 @@ export async function authenticateWithPassword(app: FastifyInstance) {
       const { email, password } = request.body
       const userFromEmail = await prisma.user.findUnique({ where: { email } })
       if (!userFromEmail) {
-        throw Error('Credentials invalid.')
+        throw new BadRequestError('Credentials invalid.')
       }
 
       if (!userFromEmail.passwordHash) {
-        throw new Error(
+        throw new BadRequestError(
           'User does not have a password. Please use social login.'
         )
       }
 
       if (!(await compare(password, userFromEmail.passwordHash))) {
-        throw new Error('Credentials invalid.')
+        throw new BadRequestError('Credentials invalid.')
       }
 
       const token = await reply.jwtSign(

@@ -1,4 +1,5 @@
 import { env } from '@/env'
+import { BadRequestError } from '@/http/_errors/bad-request-error'
 import { prisma } from '@/http/lib/prisma'
 import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
@@ -77,7 +78,7 @@ export async function authenticateWithGithub(app: FastifyInstance) {
         .parse(githubUserData)
 
       if (email === null) {
-        throw new Error(
+        throw new BadRequestError(
           'Your GitHub account must have an email to authenticate.'
         )
       }

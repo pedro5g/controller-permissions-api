@@ -13,9 +13,13 @@ import { env } from '@/env'
 import { createAccount } from './routes/auth/create-account'
 import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
 import { authenticateWithGithub } from './routes/auth/authenticate-with-github'
+import { globalErrorHandle } from './global-errror-handle'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.register(cors)
+
+// error handler
+app.setErrorHandler(globalErrorHandle)
 
 // set jwt config
 app.register(fastifyJwt, {
