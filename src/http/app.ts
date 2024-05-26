@@ -13,7 +13,7 @@ import { env } from '@/env'
 import { createAccount } from './routes/auth/create-account'
 import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
 import { authenticateWithGithub } from './routes/auth/authenticate-with-github'
-import { globalErrorHandle } from './global-errror-handle'
+import { globalErrorHandle } from './global-error-handle'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.register(cors)
