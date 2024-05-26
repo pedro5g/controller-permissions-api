@@ -10,6 +10,7 @@ import fastifySwaggerUi from '@fastify/swagger-ui'
 import cors from '@fastify/cors'
 import fastifyJwt from '@fastify/jwt'
 import { env } from '@/env'
+import { createAccount } from './routes/auth/create-account'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.register(cors)
@@ -45,3 +46,6 @@ app.register(fastifySwaggerUi, {
 
 app.setSerializerCompiler(serializerCompiler)
 app.setValidatorCompiler(validatorCompiler)
+
+// auth route
+app.register(createAccount)
