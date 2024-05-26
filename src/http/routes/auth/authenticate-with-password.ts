@@ -20,13 +20,28 @@ export async function authenticateWithPassword(app: FastifyInstance) {
         response: {
           201: z.object({
             token: z.string(),
+            user: z.object({
+              id: z.string().uuid(),
+              name: z.string().nullable(),
+              email: z.string().email(),
+              avatarUrl: z.string().url().nullable(),
+            }),
           }),
         },
       },
     },
     async (request, reply) => {
       const { email, password } = request.body
-      const userFromEmail = await prisma.user.findUnique({ where: { email } })
+      const userFromEmail = await prisma.user.findUnique({
+        where: { email },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          avatarUrl: true,
+          passwordHash: true,
+        },
+      })
       if (!userFromEmail) {
         throw new BadRequestError('Credentials invalid.')
       }
@@ -46,7 +61,9 @@ export async function authenticateWithPassword(app: FastifyInstance) {
         { expiresIn: env.JWT_EXPIRATION_TIME }
       )
 
-      return reply.status(201).send({ token })
+      const { passwordHash, ...user } = userFromEmail
+
+      return reply.status(201).send({ token, user: { ...user } })
     }
   )
 }

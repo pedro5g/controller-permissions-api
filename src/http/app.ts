@@ -14,6 +14,7 @@ import { createAccount } from './routes/auth/create-account'
 import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
 import { authenticateWithGithub } from './routes/auth/authenticate-with-github'
 import { globalErrorHandle } from './global-error-handle'
+import { getProfile } from './routes/auth/get-profile'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.register(cors)
@@ -57,3 +58,4 @@ app.setValidatorCompiler(validatorCompiler)
 app.register(createAccount)
 app.register(authenticateWithPassword)
 app.register(authenticateWithGithub)
+app.register(getProfile)

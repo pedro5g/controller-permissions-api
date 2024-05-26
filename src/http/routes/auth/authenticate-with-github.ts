@@ -18,6 +18,12 @@ export async function authenticateWithGithub(app: FastifyInstance) {
         response: {
           201: z.object({
             token: z.string(),
+            user: z.object({
+              id: z.string().uuid(),
+              name: z.string().nullable(),
+              email: z.string().email(),
+              avatarUrl: z.string().url().nullable(),
+            }),
           }),
         },
       },
@@ -127,7 +133,9 @@ export async function authenticateWithGithub(app: FastifyInstance) {
         }
       )
 
-      return reply.status(201).send({ token })
+      return reply
+        .status(201)
+        .send({ token, user: { id: user.id, name, email, avatarUrl } })
     }
   )
 }
