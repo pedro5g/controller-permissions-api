@@ -11,6 +11,7 @@ import cors from '@fastify/cors'
 import fastifyJwt from '@fastify/jwt'
 import { env } from '@/env'
 import { createAccount } from './routes/auth/create-account'
+import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.register(cors)
@@ -49,3 +50,4 @@ app.setValidatorCompiler(validatorCompiler)
 
 // auth route
 app.register(createAccount)
+app.register(authenticateWithPassword)
