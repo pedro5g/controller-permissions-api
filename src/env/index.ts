@@ -8,6 +8,10 @@ const environmentSchema = z.object({
   GITHUB_OAUTH_CLIENT_ID: z.string(),
   GITHUB_OAUTH_CLIENT_SECRET: z.string(),
   GITHUB_OAUTH_CLIENT_REDIRECT_URI: z.string(),
+  EMAIL_SERVICE: z.string().default('gmail'),
+  EMAIL_HOST: z.string().default('smtp.gmail.com'),
+  EMAIL_ADDRESS: z.string().email(),
+  EMAIL_PASSWORD: z.string(),
 })
 
 const _env = environmentSchema.safeParse(process.env)

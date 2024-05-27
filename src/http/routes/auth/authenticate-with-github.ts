@@ -7,7 +7,7 @@ import z from 'zod'
 
 export async function authenticateWithGithub(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
-    '/user/sessions/github',
+    '/user/session/github',
     {
       schema: {
         tags: ['Auth'],

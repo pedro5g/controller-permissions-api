@@ -7,7 +7,7 @@ import z from 'zod'
 
 export async function createAccount(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
-    '/auth/user/create',
+    '/user/create',
     {
       schema: {
         tags: ['Auth'],
