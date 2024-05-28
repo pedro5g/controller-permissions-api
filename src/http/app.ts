@@ -20,6 +20,7 @@ import { passwordReset } from './routes/auth/password-reset'
 import { sendHtmlPage } from './routes/send-html-page'
 import { registerOrganization } from './routes/orgs/register-organization'
 import { getOrganization } from './routes/orgs/get-organization'
+import { getOrganizations } from './routes/orgs/get-organizations'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.register(cors)
@@ -73,3 +74,4 @@ app.register(sendHtmlPage)
 
 app.register(registerOrganization)
 app.register(getOrganization)
+app.register(getOrganizations)
