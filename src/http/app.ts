@@ -18,6 +18,8 @@ import { getProfile } from './routes/auth/get-profile'
 import { requestPasswordRecover } from './routes/auth/request-password-recover'
 import { passwordReset } from './routes/auth/password-reset'
 import { sendHtmlPage } from './routes/send-html-page'
+import { registerOrganization } from './routes/orgs/register-organization'
+import { getOrganization } from './routes/orgs/get-organization'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.register(cors)
@@ -64,6 +66,10 @@ app.register(authenticateWithGithub)
 app.register(getProfile)
 app.register(requestPasswordRecover)
 app.register(passwordReset)
-
 // testing password recovery
 app.register(sendHtmlPage)
+
+// organization routes
+
+app.register(registerOrganization)
+app.register(getOrganization)
