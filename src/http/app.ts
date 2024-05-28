@@ -27,6 +27,7 @@ import { getMembership } from './routes/orgs/get-membership'
 import { transferOrganization } from './routes/orgs/transfer-organization'
 import { createProject } from './routes/projects/create-project'
 import { updateProject } from './routes/projects/update-project'
+import { deleteProject } from './routes/projects/delete-project'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.register(cors)
@@ -88,3 +89,4 @@ app.register(transferOrganization)
 // project routes
 app.register(createProject)
 app.register(updateProject)
+app.register(deleteProject)
