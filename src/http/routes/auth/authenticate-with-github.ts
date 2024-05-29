@@ -6,13 +6,30 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
 export async function authenticateWithGithub(app: FastifyInstance) {
-  app.withTypeProvider<ZodTypeProvider>().post(
-    '/user/session/github',
+  // delete this route in production
+  app.withTypeProvider<ZodTypeProvider>().get(
+    '/login/github',
+    {
+      schema: {
+        tags: ['Utility routes'],
+        summary: 'This routes is only to testing without need a html page.',
+        description:
+          '<b>This route cannot be tested in the swagger documentation. To do this, access the url in "localhost"</b>',
+      },
+    },
+    async (_request, reply) => {
+      const redirectUrl = `https://github.com/login/oauth/authorize?client_id=${env.GITHUB_OAUTH_CLIENT_ID}&redirect_uri=${encodeURIComponent(env.GITHUB_OAUTH_CLIENT_REDIRECT_URI)}&scope=user:email`
+      reply.redirect(redirectUrl)
+    }
+  )
+
+  app.withTypeProvider<ZodTypeProvider>().get(
+    '/login/github/callback',
     {
       schema: {
         tags: ['Auth'],
         summary: 'Authenticate with github',
-        body: z.object({
+        querystring: z.object({
           code: z.string(),
         }),
         response: {
@@ -29,7 +46,8 @@ export async function authenticateWithGithub(app: FastifyInstance) {
       },
     },
     async (request, reply) => {
-      const { code } = request.body
+      const { code } = request.query
+      // console.log('code github: ', code)
       const githubOAuthURL = new URL(
         'https://github.com/login/oauth/access_token'
       )
@@ -68,6 +86,8 @@ export async function authenticateWithGithub(app: FastifyInstance) {
       })
 
       const githubUserData = await githubUserResponse.json()
+
+      // console.log('git user data: ', githubUserData)
 
       const {
         id: githubId,
