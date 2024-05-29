@@ -30,6 +30,8 @@ import { updateProject } from './routes/projects/update-project'
 import { deleteProject } from './routes/projects/delete-project'
 import { getProject } from './routes/projects/get-project'
 import { getProjects } from './routes/projects/get-projects'
+import z from 'zod'
+import { authenticateWithGoogle } from './routes/auth/authenticate-with-google'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.register(cors)
@@ -73,6 +75,7 @@ app.setValidatorCompiler(validatorCompiler)
 app.register(createAccount)
 app.register(authenticateWithPassword)
 app.register(authenticateWithGithub)
+app.register(authenticateWithGoogle)
 app.register(getProfile)
 app.register(requestPasswordRecover)
 app.register(passwordReset)

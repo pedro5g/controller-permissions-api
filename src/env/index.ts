@@ -12,6 +12,9 @@ const environmentSchema = z.object({
   EMAIL_HOST: z.string().default('smtp.gmail.com'),
   EMAIL_ADDRESS: z.string().email(),
   EMAIL_PASSWORD: z.string(),
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_SECRET_KEY: z.string(),
+  REDIRECT_URI: z.string().url(),
 })
 
 const _env = environmentSchema.safeParse(process.env)
