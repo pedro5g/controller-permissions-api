@@ -38,6 +38,10 @@ import { updateMember } from './routes/members/update-member'
 import { createInvite } from './routes/invite/create-invite'
 import { acceptInvite } from './routes/invite/accept-invite'
 import { rejectInvite } from './routes/invite/reject-invite'
+import { revokeInvite } from './routes/invite/revoke-invite'
+import { getInvite } from './routes/invite/get-invite'
+import { getInvites } from './routes/invite/get-invites'
+import { getPendingInvites } from './routes/invite/get-pending-invite'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.register(cors)
@@ -113,3 +117,7 @@ app.register(updateMember)
 app.register(createInvite)
 app.register(acceptInvite)
 app.register(rejectInvite)
+app.register(revokeInvite)
+app.register(getInvite)
+app.register(getInvites)
+app.register(getPendingInvites)
