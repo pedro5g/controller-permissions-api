@@ -12,12 +12,12 @@ export async function getMembers(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .register(authMiddleware)
     .get(
-      'organization/:slug/members',
+      '/organization/:slug/members',
       {
         schema: {
           tags: ['Members'],
           summary: 'Get members',
-          security: [{ BearerAuth: [] }],
+          security: [{ bearerAuth: [] }],
           params: z.object({
             slug: z.string(),
           }),

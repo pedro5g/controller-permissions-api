@@ -11,12 +11,12 @@ export async function removeMember(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .register(authMiddleware)
     .delete(
-      'organization/:slug/member/:memberId',
+      '/organization/:slug/member/:memberId',
       {
         schema: {
           tags: ['Members'],
           summary: 'Delete member',
-          security: [{ BearerAuth: [] }],
+          security: [{ bearerAuth: [] }],
           params: z.object({
             slug: z.string(),
             memberId: z.string().uuid(),

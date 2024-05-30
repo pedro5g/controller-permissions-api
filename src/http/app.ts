@@ -35,6 +35,9 @@ import { authenticateWithGoogle } from './routes/auth/authenticate-with-google'
 import { getMembers } from './routes/members/get-members'
 import { removeMember } from './routes/members/remove-member'
 import { updateMember } from './routes/members/update-member'
+import { createInvite } from './routes/invite/create-invite'
+import { acceptInvite } from './routes/invite/accept-invite'
+import { rejectInvite } from './routes/invite/reject-invite'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.register(cors)
@@ -105,3 +108,8 @@ app.register(getProjects)
 app.register(getMembers)
 app.register(removeMember)
 app.register(updateMember)
+
+// invite routes
+app.register(createInvite)
+app.register(acceptInvite)
+app.register(rejectInvite)
