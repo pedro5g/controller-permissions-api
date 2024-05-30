@@ -34,6 +34,7 @@ import { getProjects } from './routes/projects/get-projects'
 import { authenticateWithGoogle } from './routes/auth/authenticate-with-google'
 import { getMembers } from './routes/members/get-members'
 import { removeMember } from './routes/members/remove-member'
+import { updateMember } from './routes/members/update-member'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.register(cors)
@@ -103,3 +104,4 @@ app.register(getProjects)
 // member routes
 app.register(getMembers)
 app.register(removeMember)
+app.register(updateMember)
